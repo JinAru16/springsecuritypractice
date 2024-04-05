@@ -1,9 +1,10 @@
 package com.security.hellosecurity.auth.service;
 
 import com.security.hellosecurity.auth.domain.entity.Users;
+import com.security.hellosecurity.auth.domain.request.UserCreate;
 import com.security.hellosecurity.auth.repository.UserRepository;
+import com.security.hellosecurity.exception.domain.dto.DuplicatedMember;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Users create(String userId, String password, String email, String authority){
+    public Users createUser(UserCreate userCreate){
+        Users usersByUserId = userRepository.findUsersByUserId(userCreate.getUserId());
+        if(usersByUserId != null){
+            throw new DuplicatedMember();
+        }
         Users user = Users.builder()
-                .userId(userId)
-                .password( passwordEncoder.encode(password))
-                .email(email)
-                .authority(authority)
+                .userId(userCreate.getUserId())
+                .password( passwordEncoder.encode(userCreate.getPassword()))
+                .email(userCreate.getEmail())
                 .build();
 
         return userRepository.save(user);

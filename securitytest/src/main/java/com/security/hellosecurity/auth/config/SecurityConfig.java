@@ -48,15 +48,15 @@ public class SecurityConfig {
 
             //SameOrigin 정책을 허용시켜서 iframe 접근이 허용 -> h2이용시에 Forbidden(403)이 나오지 않는다
             .headers((headersConfigure) -> headersConfigure
-                    .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+                  .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         http
             .authorizeHttpRequests(authorizeRequest ->
-                   authorizeRequest.requestMatchers(
-                           AntPathRequestMatcher.antMatcher("/auth/**"),
-                           AntPathRequestMatcher.antMatcher("/add/**"),
-                           AntPathRequestMatcher.antMatcher("/edit/**")
-                   ).permitAll()
+                 authorizeRequest.requestMatchers(
+                         AntPathRequestMatcher.antMatcher("/auth/**"),
+                         AntPathRequestMatcher.antMatcher("/add/**"),
+                         AntPathRequestMatcher.antMatcher("/edit/**")
+                 ).permitAll()
             );
         return http.build();
     }

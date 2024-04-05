@@ -20,13 +20,11 @@ public class Users {
 
     @Column(unique = true)
     private String email;
-    private String authority;
 
     @Builder
-    public Users(String userId, String password, String email, String authority) {
+    public Users(String userId, String password, String email) {
         this.userId = userId;
         this.password = password;
         this.email = email;
-        this.authority = authority;
     }
 }
