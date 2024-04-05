@@ -7,7 +7,7 @@ spring:
       matching-strategy: ant_path_matcher
   jpa:
     hibernate:
-      ddl-auto: create #create : 테이블이 있으면 드랍하고 새로 생성하는 옵션
+      ddl-auto: update #create : 테이블이 있으면 드랍하고 새로 생성하는 옵션
     properties:
       hibernate:
         format_sql: true

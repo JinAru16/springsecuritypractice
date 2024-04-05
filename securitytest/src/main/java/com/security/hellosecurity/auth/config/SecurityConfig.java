@@ -53,9 +53,9 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorizeRequest ->
                  authorizeRequest.requestMatchers(
-                         AntPathRequestMatcher.antMatcher("/auth/**"),
-                         AntPathRequestMatcher.antMatcher("/add/**"),
-                         AntPathRequestMatcher.antMatcher("/edit/**")
+                         AntPathRequestMatcher.antMatcher("/api/auth/**"),
+                         AntPathRequestMatcher.antMatcher("/api/add/**"),
+                         AntPathRequestMatcher.antMatcher("/api/edit/**")
                  ).permitAll()
             );
         return http.build();
