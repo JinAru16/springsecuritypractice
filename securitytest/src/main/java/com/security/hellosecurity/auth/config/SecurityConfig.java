@@ -52,11 +52,9 @@ public class SecurityConfig {
 
         http
             .authorizeHttpRequests(authorizeRequest ->
-                 authorizeRequest.requestMatchers(
-                         AntPathRequestMatcher.antMatcher("/api/auth/**"),
-                         AntPathRequestMatcher.antMatcher("/api/add/**"),
-                         AntPathRequestMatcher.antMatcher("/api/edit/**")
-                 ).permitAll()
+                 authorizeRequest
+                         .requestMatchers("/api/auth/**", "/api/add/**", "/api/edit/**").permitAll()
+                         .requestMatchers("/api/delete/**","/api/permit/**").hasRole("ADMIN")
             );
         return http.build();
     }
