@@ -53,8 +53,14 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorizeRequest ->
                  authorizeRequest
-                         .requestMatchers("/api/auth/**", "/api/add/**", "/api/edit/**").permitAll()
-                         .requestMatchers("/api/delete/**","/api/permit/**").hasRole("ADMIN")
+                         .requestMatchers(
+                                 "/api/auth/**",
+                                           "/api/add/**",
+                                           "/api/edit/**").permitAll()
+
+                         .requestMatchers(
+                                 "/api/delete/**",
+                                           "/api/permit/**").hasRole("ADMIN")
             );
         return http.build();
     }
